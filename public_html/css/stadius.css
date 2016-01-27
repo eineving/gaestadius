@@ -1,0 +1,246 @@
+@charset "UTF-8";
+
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+}
+
+#full-screen-background-image {
+  z-index: -999;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: -20;
+  left: 0;
+}
+#wrapper {
+  position: relative;
+  width: 900px;
+  height: 100%;
+  margin: auto auto;
+  color: #000;
+}
+
+/* ~~ Den här behållaren med fast bredd omger alla övriga block ~~ */
+.container {
+	width: 900px;
+	margin: 0 auto; /* det automatiska värdet på sidorna, tillsammans med bredden, centrerar layouten */
+	z-index: 10;
+	font-family: 'Raleway', sans-serif;
+	color: #000;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 28px;
+	letter-spacing: 2px;
+}
+
+.container_kontakt {
+	width: 900px;
+	margin: 0 auto; /* det automatiska värdet på sidorna, tillsammans med bredden, centrerar layouten */
+	z-index: 10;
+	font-family: 'Raleway', sans-serif;
+	color: #000;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 25px;
+	letter-spacing: 2px;
+}
+
+.container_medarbetare {
+	width: 900px;
+	margin: 0 auto; /* det automatiska värdet på sidorna, tillsammans med bredden, centrerar layouten */
+	z-index: 10;
+	font-family: 'Raleway', sans-serif;
+	color: #000;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 25px;
+	letter-spacing: 2px;
+}
+
+.content {
+	padding: 10px 0;
+	width: 450px;
+	float: right;
+}
+
+.tr_fill {
+	position: absolute;
+	-webkit-transform: translate3d(0,0,0);
+	bottom: 0px;
+	left: 450px;
+	width: 455px;
+	height: 100%;
+	background: #FFF;	
+	/* Theoretically for IE 8 & 9 (more valid) */	
+	/* ...but not required as filter works too */
+	/* should come BEFORE filter */
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+	
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=70);
+	
+	/* Older than Firefox 0.9 */
+	-moz-opacity:0.7;
+	
+	/* Safari 1.x (pre WebKit!) */
+	-khtml-opacity: 0.7;
+    
+	/* Modern!
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+ */
+	opacity: 0.7;
+	z-index: -10;
+}
+
+.logo {
+	position: relative;
+	top: 50px;
+	width: 900px;
+	min-height: 190px;
+}
+
+/* ~~ Element-/taggväljare ~~ */
+ul, ol, dl { /* På grund av skillnader mellan webbläsare är det bäst att nollställa utfyllnad (padding) och marginal (margin) i listor. För att få det konsekvent kan du ange värdena du vill ha antingen här eller i listobjekten (LI, DT, DD) som de innehåller. Kom ihåg att det du gör här överlappar till navigeringslistan om du inte skriver en mer specifik väljare. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* om du tar bort toppmarginalen kringgår du ett problem där marginaler kan försvinna från sitt innehållsblock. Bottenmarginalen som finns kvar håller den undan från efterföljande element. */
+	padding-right: 15px;
+	padding-left: 22px; /* om du lägger till utfyllnaden på sidorna av elementen i blocken, i stället för i blockelementen själva, slipper du all rutmodellsmatematik. Du kan även som alternativ metod använda ett kapslat block med utfyllnad på sidorna. */
+}
+a img { /* den här väljaren tar bort den blå kanten som visas i vissa webbläsare runt en bild när den omges av en länk */
+	border: none;
+}
+/* ~~ Formateringen av webbplatsens länkar måste förbli i den här ordningen – inklusive gruppen av väljare som skapar hovringseffekten. ~~ */
+a:link {
+	color: #000000;
+	text-decoration: none; /* såvida du inte formaterar dina länkar så att de ser extremt unika ut, är det bäst att använda understrykning för snabb visuell igenkänning */
+}
+a:visited {
+	color: #000000;
+	text-decoration: none;
+}
+a:hover, a:active, a:focus { /* den här gruppen väljare ger den som använder tangentbord samma hovringsupplevelse som den som använder mus. */
+	color: #8591b9;
+	text-decoration: none;
+}
+
+/* ~~ Du anger inte någon bredd för sidhuvudet. Det sträcker sig över layoutens hela bredd. ~~ */
+header {
+	background-color: #ADB96E;
+}
+/* ~~ Det här är kolumnerna för layouten. ~~ 
+
+1) Utfyllnad (padding) anges bara i topp och/eller botten på blockelementen. Elementen i de här blocken har utfyllnad på sidorna. Detta besparar dig all ”rutmodellsmatematik”. Kom ihåg att om du lägger till någon utfyllnad eller kant på sidorna på själva blocken, läggs detta till bredden som du definierar och bildar den ”totala” bredden. Du kan också välja att ta bort utfyllnaden på elementet i blockelementet och placera ett andra blockelementet inuti det utan någon bredd och med den utfyllnad som designen kräver.
+
+2) Ingen marginal har angetts för kolumnerna eftersom alla är flytande. Om du måste lägga till marginal ska du undvika att placera den på den sida som du flyter mot (t.ex. en högermarginal på ett block som flyter åt höger). Ofta kan du använda utfyllnad i stället. För block där den här regeln måste brytas bör du lägga till deklarationen display:inline i blockelementets regel för att motverka ett fel där marginalen fördubblas i vissa versioner av Internet Explorer.
+
+3) Eftersom klasser kan användas flera gånger i ett dokument (och ett element kan också ha flera tillämpade klasser), har kolumnerna tilldelats klassnamn i stället för ID:n. Två sidospaltsblock kan t.ex. staplas om det behövs. De kan mycket enkelt ändras till ID:n om det är vad du föredrar, så länge du bara använder dem en gång per dokument.
+
+4) Om du hellre vill ha navigeringen till vänster än till höger låter du helt enkelt de här kolumnerna flyta åt motsatt håll (längst till vänster i stället för höger) så återges de i omvänd ordning. Det är onödigt att flytta runt på blocken i HTML-källan.
+
+*/
+
+
+
+
+/* ~~ Den här grupperade väljaren anger listorna i innehållsområdet ~~ */
+.content ul, .content ol {
+	padding: 0 15px 15px 40px; /* den här utfyllnaden (padding) speglar utfyllnaden åt höger i rubrikerna och styckelinjen ovan. Utfyllnad placerades längst ned för att få mellanrum mellan andra element i listorna och till vänster för att skapa indraget. Detta kan du anpassa efter egna önskemål. */
+}
+
+/* ~~ Navigeringslistformaten (kan tas bort om du väljer att använda en fördefinierad flytande popup-meny som Spry) ~~ */
+ul.nav {
+	list-style: none; /* det här tar bort listmarkeringen */
+	border-top: 1px solid #666; /* det här skapar den övre kanten för länkarna – alla andra läggs in med en nedre kant på LI */
+	margin-bottom: 15px; /* det här skapar utrymmet mellan navigeringen i innehållet nedan */
+}
+ul.nav li {
+	border-bottom: 1px solid #666; /* det här skapar knappavståndet */
+}
+ul.nav a, ul.nav a:visited { /* genom att gruppera de här väljarna ser du till att länkarna behåller sitt knapputseende även sedan de besökts */
+	padding: 5px 5px 5px 15px;
+	display: block; /* det här anger länkblocksegenskaperna och får det att fylla hela den LI som det ingår i. Detta får hela området att reagera på ett musklick. */
+	width: 160px;  /*den här bredden gör att hela knappen går att klicka på i IE6. Om du inte behöver ha stöd för IE6 kan den tas bort. Beräkna lämplig bredd genom att subtrahera utfyllnaden på den här länken från bredden på sidospaltsbehållaren. */
+	text-decoration: none;
+	background-color: #C6D580;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* det här ändrar bakgrunds- och textfärgen för både mus- och tangentbordsanvändare */
+	background-color: #ADB96E;
+	color: #FFF;
+}
+
+/* ~~ Sidfoten ~~ */
+footer {
+	padding: 10px 0;
+	background-color: #CCC49F;
+	position: relative;/* det här aktiverar IE6 hasLayout att rensa ordentligt */
+	clear: both; /* den här rensningsegenskapen tvingar behållaren att läsa av var kolumnerna slutar och innesluta dem */
+}
+/* ~~ Olika float/clear-klasser ~~ */
+.fltrt {  /* den här klassen kan du använda för att låta ett element flyta åt höger på sidan. Det flytande elementet måste komma före elementet som det ska ligga bredvid på sidan. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* den här klassen kan du använda för att låta ett element flyta åt vänster på sidan. Det flytande elementet måste komma före elementet som det ska ligga bredvid på sidan. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* den här klassen kan du placera på en <br /> eller tomt blockelement som sista element efter den sista flytande blocken (i behållaren, .container) om sidfoten tas bort ur behållaren */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+/*HTML 5-stöd – Anger nya HTML 5-taggar till display:block så att webbläsare vet hur taggarna ska återges. */
+header, section, footer, aside, article, figure {
+	display: block;
+}
+
+.sub_menu {
+	position: relative;
+	width: 455px;
+	left: 472px;
+	height: 20px;
+	font-size: 20px;
+	font-weight: 300;
+	padding-top: 5px;
+}
+.sub_menu_hem {
+	position: relative;
+	width: 455px;
+	left: 472px;
+	height: 20px;
+	font-size: 20px;
+	font-weight: 300;
+	padding-top: 4px;
+}
+
+.karta {
+	position: relative;
+	width: 600px;
+	height: 300px;
+	left: 288px;
+	font-size: 20px;
+	font-weight: 300;
+	padding-top: 45px;
+}
+
+.advokater {
+	position: relative;
+	width: 748px;
+	height: 350px;
+	left: 140px;
+	font-size: 20px;
+	font-weight: 300;
+	padding-top: 45px;
+}
